@@ -100,7 +100,48 @@ WHEN time BETWEEN "12:01:00" AND "16:00:00"  THEN "noon"
     -- no of sales made in each time of the day per weekday
 
 select * from sales;
-select time_of_day ,count(*) from sales group by time_of_day;
+select time_of_day ,count(*) from sales where day="wednesday"  group by time_of_day;
+
+-- which of the customer type bring more revenue---------
+select customer_type,sum(total) as totals from sales group by customer_type  order by totals desc;
+
+-- which city has largest tax percent/vat --------
+select city,avg(vat) as avgs from sales group by city order by avgs desc;
+
+-- which customer type pays more vat------
+select customer_type,sum(vat)  as more from sales group by customer_type order by  more desc;
+
+-- customer---
+-- how many unique customer types does data have ----
+
+select count(distinct customer_type) from sales;
+
+-- how many unique payment methods does the data have
+select * from sales;
+select distinct payment_method from sales;
+
+
+-- most  customer type  buys the most--------
+select customer_type ,sum(quantity) as totals from sales group by customer_type order by totals desc;
+
+-- what is the genser type of most of the customer -------------
+select gender,count(*) from sales group by gender;
+
+-- what is the gender distribution per branch-----------
+select gender ,count(*)from sales where branch="A" group by gender;
+
+-- which time of the day customer give most rating----
+select time_of_day ,avg(rating) as totals  from sales group by time_of_day order by totals desc;
+
+-- which day of week has the best avg rating------
+select * from sales;
+select day,avg(rating) as alls  from sales group by day order by alls desc;
+
+-- which day of the week has the best avg ratings per branch---
+select day ,avg(rating) as alls from sales where branch="A" group by day;
+
+
+
     
     
     
